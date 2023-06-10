@@ -5,7 +5,7 @@ const client=require('./Config/influx')
 //influx fetch data ==> read data
 const fetchdata=async function(){
     try{
-        const data=await client.query(`SELECT * FROM cpu1`);
+        const data=await client.query(`SELECT * FROM Consumption`);
         console.log(data);
     }catch(err){
         console.log(err);
@@ -16,7 +16,7 @@ const fetchdata=async function(){
 module.exports.insertdata=async function(id,element){
     try{
         await client.writePoints([{
-            measurement:'cpu1',
+            measurement:'Consumption',
             tags:{id},
             fields:{value:element},
         },]);
