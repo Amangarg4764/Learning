@@ -13,12 +13,12 @@ const fetchdata=async function(){
 }
 
 //influx for create data
-module.exports.insertdata=async function(id,element){
+module.exports.insertdata=async function(t1,v1){
     try{
         await client.writePoints([{
             measurement:'Consumption',
-            tags:{id},
-            fields:{value:element},
+            tags:{tag:t1},
+            fields:{value:v1},
         },]);
         
     }catch(err){

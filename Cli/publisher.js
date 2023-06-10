@@ -3,13 +3,18 @@ const insert=require('../index').insertdata;
 // MQTT broker information
 const broker = mqtt.connect("mqtt://127.0.0.1:1883");
 
+var arr=["VOLTS1","VOLTS2","VOLTS3","CUR1","CUR2","CUR3",
+"W1","W2","W3","PF1","PF2","PF3","PFAVG","FREQ","REACTIVE","ACTIVE", "MDKW","MD","RSSI"];
 
 broker.on("connect",function(){
-  var count=1;
   setInterval(function(){
-    var random=Math.random()*50;
-    insert(count,random);
-    count++;
-  broker.publish("consumption","Publishing the content "+random);
-  },5000)
+    // get random tags to the publisher
+    var r=arr[Math.floor(Math.random()*arr.length)];
+    // get random float number betweent 1 to 500
+    var random=Math.random()*500;
+    insert(r,random);
+    broker.publish("consumption","Publishing the content tag= " +r+ " value= "+random);
+  },3000)
 })
+
+ 
