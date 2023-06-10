@@ -10,7 +10,6 @@ broker.on("connect",function(){
     var random=Math.random()*50;
     insert(count,random);
     count++;
-  console.log(random);
   broker.publish("consumption","Publishing the content "+random);
   },5000)
 })
