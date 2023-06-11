@@ -1,12 +1,13 @@
 const client=require('./Config/influx')
-
 //  --------------------------------------------------      CRUD operation-----------
 
 //influx fetch data ==> read data
 const fetchdata=async function(){
     try{
-        const data=await client.query(`SELECT * FROM Consumption`);
-        console.log(data);
+        const data=await client.query(`SELECT * FROM Consumption limit 10`);
+        data.map(val=>{
+            console.log(val.value);
+        });
     }catch(err){
         console.log(err);
     }
@@ -17,9 +18,10 @@ module.exports.insertdata=async function(t1,v1){
     try{
         await client.writePoints([{
             measurement:'Consumption',
-            tags:{tag:t1},
+            tags:{device:t1},
             fields:{value:v1},
         },]);
+      
         
     }catch(err){
         console.log(err)

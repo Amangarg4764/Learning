@@ -1,5 +1,5 @@
 const mqtt = require('mqtt');
-const insert=require('../index').insertdata;
+
 // MQTT broker information
 const broker = mqtt.connect("mqtt://127.0.0.1:1883");
 
@@ -12,8 +12,11 @@ broker.on("connect",function(){
     var r=arr[Math.floor(Math.random()*arr.length)];
     // get random float number betweent 1 to 500
     var random=Math.random()*500;
-    insert(r,random);
-    broker.publish("consumption","Publishing the content tag= " +r+ " value= "+random);
+    var obj={
+      tag:r,val:random
+    }
+    console.log(obj.tag)
+    broker.publish("consumption",`${obj.tag} ${obj.val}`);
   },3000)
 })
 
