@@ -17,8 +17,8 @@ const fetchdata=async function(){
 module.exports.insertdata=async function(t1,v1){
     try{
         await client.writePoints([{
-            measurement:'Consumption',
-            tags:{device:t1},
+            measurement:'consumption',
+            tags:{measurement:'consumption',device:t1},
             fields:{value:v1},
         },]);
       

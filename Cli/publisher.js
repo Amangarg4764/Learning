@@ -3,20 +3,93 @@ const mqtt = require('mqtt');
 // MQTT broker information
 const broker = mqtt.connect("mqtt://127.0.0.1:1883");
 
-var arr=["VOLTS1","VOLTS2","VOLTS3","CUR1","CUR2","CUR3",
-"W1","W2","W3","PF1","PF2","PF3","PFAVG","FREQ","REACTIVE","ACTIVE", "MDKW","MD","RSSI"];
+    const data=[
+        {
+            "tag": "VOLTS1",
+            "value": 228.07602856051832
+        },
+        {
+            "tag": "VOLTS2",
+            "value": 228.3990800794001
+        },
+        {
+            "tag": "VOLTS3",
+            "value": 227.9216194144245
+        },
+        {
+            "tag": "CUR1",
+            "value": 1.676028560518326
+        },
+        {
+            "tag": "CUR2",
+            "value": 2.776028560518326
+        },
+        {
+            "tag": "CUR3",
+            "value": 2.376028560518326
+        },
+        {
+            "tag": "W1",
+            "value": 0.4260285605183258
+        },
+        {
+            "tag": "W2",
+            "value": 0.6460285605183258
+        },
+        {
+            "tag": "W3",
+            "value": 0.5960285605183259
+        },
+        {
+            "tag": "PF1",
+            "value": 0.8376028560518325
+        },
+        {
+            "tag": "PF2",
+            "value": 0.8076028560518327
+        },
+        {
+            "tag": "PF3",
+            "value": 0.8276028560518325
+        },
+        {
+            "tag": "PFAVG",
+            "value": 0.8276028560518325
+        },
+        {
+            "tag": "FREQ",
+            "value": 50.076028560518324
+        },
+        {
+            "tag": "REACTIVE",
+            "value": 1.306028560518326
+        },
+        {
+            "tag": "ACTIVE",
+            "value": 1.326028560518326
+        },
+        {
+            "tag": "MDKW",
+            "value": 2.15
+        },
+        {
+            "tag": "MD",
+            "value": 1.9
+        },
+        {
+            "tag": "RSSI",
+            "value": 16.076028560518324
+        }
+    ]
+
 
 broker.on("connect",function(){
   setInterval(function(){
     // get random tags to the publisher
-    var r=arr[Math.floor(Math.random()*arr.length)];
+    var r=data[Math.floor(Math.random()*arr.length)];
     // get random float number betweent 1 to 500
-    var random=Math.random()*500;
-    var obj={
-      tag:r,val:random
-    }
-    console.log(obj.tag)
-    broker.publish("consumption",`${obj.tag} ${obj.val}`);
+    console.log(r)
+    broker.publish("consumption",`${obj.tag} ${obj.value}`);
   },3000)
 })
 
