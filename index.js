@@ -14,15 +14,16 @@ const fetchdata=async function(){
 }
 
 //influx for create data
-module.exports.insertdata=async function(t1,v1){
+module.exports.insertdata=async function(obj){
+    
     try{
+        var obj=JSON.parse(obj);
         await client.writePoints([{
-            measurement:'consumption',
-            tags:{measurement:'consumption',device:t1},
-            fields:{value:v1},
+            measurement:obj.device,
+            tags:{measurement:obj.device,device:obj.tag},
+            fields:{value:obj.value},
         },]);
-      
-        
+            console.log("Message save to database");
     }catch(err){
         console.log(err)
     }

@@ -10,14 +10,12 @@ const options = {
 const client = mqtt.connect(broker, options);
 
 client.on('connect',function(){
-  client.subscribe('consumption');
+  client.subscribe('INEM_DEMO');
   console.log('client is subscribe the topic');
 })
 
 // Callback function when a message is received
 client.on('message', (topic, message) => {
-  
-  var arr=message.toString().split(" ");
- insert(arr[0],arr[1]);
-  console.log('Received message:', arr[1]);
+  insert(message);
+  console.log("Message Received : ",JSON.parse(message));
 });

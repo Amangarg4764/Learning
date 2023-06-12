@@ -3,15 +3,17 @@ const mqtt = require('mqtt');
 // MQTT broker information
 const broker = mqtt.connect("mqtt://127.0.0.1:1883");
 
-    const data=[
-        {
-            "tag": "VOLTS1",
-            "value": 228.07602856051832
-        },
-        {
-            "tag": "VOLTS2",
-            "value": 228.3990800794001
-        },
+const package={
+  "device": "INEM_DEMO",
+  "data":[
+    {
+      "tag": "VOLTS1",
+      "value": 228.07602856051832
+    },
+    {
+      "tag": "VOLTS2",
+      "value": 228.3990800794001
+    },
         {
             "tag": "VOLTS3",
             "value": 227.9216194144245
@@ -81,15 +83,21 @@ const broker = mqtt.connect("mqtt://127.0.0.1:1883");
             "value": 16.076028560518324
         }
     ]
-
+  }
 
 broker.on("connect",function(){
   setInterval(function(){
     // get random tags to the publisher
-    var r=data[Math.floor(Math.random()*arr.length)];
-    // get random float number betweent 1 to 500
-    console.log(r)
-    broker.publish("consumption",`${obj.tag} ${obj.value}`);
+    var r=package.data[Math.floor(Math.random()*package.data.length)];
+    var now=new Date();
+    var obj={
+      "device":package.device,
+      ...r,
+      sendtime:now.toLocaleString()
+    }
+    obj=JSON.stringify(obj);
+    console.log(obj)
+    broker.publish(package.device,obj);
   },3000)
 })
 
