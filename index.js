@@ -17,11 +17,11 @@ const fetchdata=async function(){
 module.exports.insertdata=async function(obj){
     
     try{
-        var obj=JSON.parse(obj);
+        obj=JSON.parse(obj);
         await client.writePoints([{
             measurement:obj.device,
             tags:{measurement:obj.device,device:obj.tag},
-            fields:{value:obj.value},
+            fields:{value:obj.value,pubTime:obj.sendtime},
         },]);
             console.log("Message save to database");
     }catch(err){

@@ -9,6 +9,7 @@ const options = {
 // Connect to the MQTT broker
 const client = mqtt.connect(broker, options);
 
+
 client.on('connect',function(){
   client.subscribe('INEM_DEMO');
   console.log('client is subscribe the topic');
