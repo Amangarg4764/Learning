@@ -2,103 +2,102 @@ const mqtt = require('mqtt');
 
 // MQTT broker information
 const broker = mqtt.connect("mqtt://127.0.0.1:1883");
+const topic="Consumption"
+const max=1000;
+const min=1;
 
-const package={
-  "device": "INEM_DEMO",
-  "data":[
-    {
-      "tag": "VOLTS1",
-      "value": 228.07602856051832
-    },
-    {
-      "tag": "VOLTS2",
-      "value": 228.3990800794001
-    },
+broker.on("connect",function(){
+//publish data every 10 second
+setInterval(function(){
+    //get random number from math.random between from 1 to 1000
+    const random = (Math.random() * (max - min)) + min;
+    const random2 = (Math.random() * (max - min)) + min;
+    const random3 = (Math.random() * (max - min)) + min;
+    const package={
+    "device": "INEM_DEMO",
+    "time":Date.now(),
+    "data":[
+        {
+        "tag": "VOLTS1",
+        "value": random
+        },
+        {
+        "tag": "VOLTS2",
+        "value": random2
+        },
         {
             "tag": "VOLTS3",
-            "value": 227.9216194144245
+            "value": random3
         },
         {
             "tag": "CUR1",
-            "value": 1.676028560518326
+            "value": random 
         },
         {
             "tag": "CUR2",
-            "value": 2.776028560518326
-        },
-        {
-            "tag": "CUR3",
-            "value": 2.376028560518326
-        },
-        {
-            "tag": "W1",
-            "value": 0.4260285605183258
-        },
-        {
-            "tag": "W2",
-            "value": 0.6460285605183258
-        },
-        {
-            "tag": "W3",
-            "value": 0.5960285605183259
-        },
-        {
-            "tag": "PF1",
-            "value": 0.8376028560518325
-        },
-        {
-            "tag": "PF2",
-            "value": 0.8076028560518327
-        },
-        {
-            "tag": "PF3",
-            "value": 0.8276028560518325
-        },
-        {
-            "tag": "PFAVG",
-            "value": 0.8276028560518325
-        },
-        {
-            "tag": "FREQ",
-            "value": 50.076028560518324
-        },
-        {
-            "tag": "REACTIVE",
-            "value": 1.306028560518326
-        },
-        {
-            "tag": "ACTIVE",
-            "value": 1.326028560518326
-        },
-        {
-            "tag": "MDKW",
-            "value": 2.15
-        },
-        {
-            "tag": "MD",
-            "value": 1.9
-        },
-        {
-            "tag": "RSSI",
-            "value": 16.076028560518324
-        }
-    ]
-  }
-
-broker.on("connect",function(){
-  setInterval(function(){
-    // get random tags to the publisher
-    var r=package.data[Math.floor(Math.random()*package.data.length)];
-    var now=new Date();
-    var obj={
-      "device":package.device,
-      ...r,
-      sendtime:now.toLocaleString()
+            "value": random2
+            },
+            {
+                "tag": "CUR3",
+                "value": random3
+            },
+            {
+                "tag": "W1",
+                "value": random
+            },
+            {
+                "tag": "W2",
+                "value": random2
+            },
+            {
+                "tag": "W3",
+                "value": random3
+            },
+            {
+                "tag": "PF1",
+                "value": random
+            },
+            {
+                "tag": "PF2",
+                "value": random2
+            },
+            {
+                "tag": "PF3",
+                "value": random3
+            },
+            {
+                "tag": "PFAVG",
+                "value": random
+            },
+            {
+                "tag": "FREQ",
+                "value": random2
+            },
+            {
+                "tag": "REACTIVE",
+                "value": random3
+            },
+            {
+                "tag": "ACTIVE",
+                "value": random
+            },
+            {
+                "tag": "MDKW",
+                "value": random2
+            },
+            {
+                "tag": "MD",
+                "value": random3
+            },
+            {
+                "tag": "RSSI",
+                "value": random
+            }
+        ]
     }
-    obj=JSON.stringify(obj);
-    console.log(obj)
-    broker.publish(package.device,obj);
-  },3000)
+    //console.log("Publish topic : ",topic," data :",JSON.stringify(package));
+    broker.publish(topic,JSON.stringify(package));
+},5000)    
 })
 
  

@@ -8,15 +8,16 @@ const options = {
 
 // Connect to the MQTT broker
 const client = mqtt.connect(broker, options);
-
+const topic="Consumption";
 
 client.on('connect',function(){
-  client.subscribe('INEM_DEMO');
+  client.subscribe(topic);
   console.log('client is subscribe the topic');
 })
 
 // Callback function when a message is received
 client.on('message', (topic, message) => {
-  insert(message);
   console.log("Message Received : ",JSON.parse(message));
+  insert(message);
+  
 });
