@@ -1,9 +1,7 @@
 const Redis = require("ioredis");
 const redis = new Redis();
 
-
-const getLastDataPacketTime = async () => {
-  
+const getLastDataPacketTime = async () => { 
   const reply=await redis.hget('lastDataPacketTime','INEM_DEMO');
   return reply;
 };

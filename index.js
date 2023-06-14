@@ -1,13 +1,29 @@
 const client=require('./Config/influx')
+const ExcelJS=require('exceljs');
 //  --------------------------------------------------      CRUD operation-----------
 
 //influx fetch data ==> read data
 const fetchdata=async function(){
     try{
-        const data=await client.query(`SELECT * FROM Consumption limit 10`);
+      
+        const data=await client.query(`SELECT * FROM Consumption`);
+        //code of excel workbook=file
+        const Workbook=new ExcelJS.Workbook();
+        //worksheet
+        const WorkSheet=Workbook.addWorksheet('Consumption');
+        WorkSheet.columns=[
+          //  {header:'s.no',key:'s.no',width:'10'},
+            {header:'time',key:'time',width:'30'},
+            {header:'device',key:'device',width:'20'},
+            {header:'sensor',key:'sensor',width:'10'},
+            {header:'value',key:'value',width:'10'}
+        ]
+        //add data to excel
         data.map(val=>{
-            console.log(val.value);
+            WorkSheet.addRow(val);
         });
+        const r=await Workbook.xlsx.writeFile('Consumption.xlsx');
+        console.log('done')
     }catch(err){
         console.log(err);
     }
@@ -25,7 +41,7 @@ module.exports.insertdata=async function(obj){
                 await client.writePoints([{
                 measurement:"Consumption",
                 time:obj.time,
-                tags:{device:obj.device,tag:element.tag},
+                tags:{device:obj.device,sensor:element.tag},
                 fields:{value:element.value}
                 
             },]);

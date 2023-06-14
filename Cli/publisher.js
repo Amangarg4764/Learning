@@ -36,67 +36,67 @@ setInterval(function(){
         {
             "tag": "CUR2",
             "value": random2
-            },
-            {
-                "tag": "CUR3",
-                "value": random3
-            },
-            {
-                "tag": "W1",
-                "value": random
-            },
-            {
-                "tag": "W2",
-                "value": random2
-            },
-            {
-                "tag": "W3",
-                "value": random3
-            },
-            {
-                "tag": "PF1",
-                "value": random
-            },
-            {
-                "tag": "PF2",
-                "value": random2
-            },
-            {
-                "tag": "PF3",
-                "value": random3
-            },
-            {
-                "tag": "PFAVG",
-                "value": random
-            },
-            {
-                "tag": "FREQ",
-                "value": random2
-            },
-            {
-                "tag": "REACTIVE",
-                "value": random3
-            },
-            {
-                "tag": "ACTIVE",
-                "value": random
-            },
-            {
-                "tag": "MDKW",
-                "value": random2
-            },
-            {
-                "tag": "MD",
-                "value": random3
-            },
-            {
-                "tag": "RSSI",
-                "value": random
-            }
-        ]
-    }
-    //console.log("Publish topic : ",topic," data :",JSON.stringify(package));
-    broker.publish(topic,JSON.stringify(package));
+        },
+        {
+            "tag": "CUR3",
+            "value": random3
+        },
+        {
+            "tag": "W1",
+            "value": random
+        },
+        {
+            "tag": "W2",
+            "value": random2
+        },
+        {
+            "tag": "W3",
+            "value": random3
+        },
+        {
+            "tag": "PF1",
+            "value": random
+        },
+        {
+            "tag": "PF2",
+            "value": random2
+        },
+        {
+            "tag": "PF3",
+            "value": random3
+        },
+        {
+            "tag": "PFAVG",
+            "value": random
+        },
+        {
+            "tag": "FREQ",
+            "value": random2
+        },
+        {
+            "tag": "REACTIVE",
+            "value": random3
+        },
+        {
+            "tag": "ACTIVE",
+            "value": random
+        },
+        {
+            "tag": "MDKW",
+            "value": random2
+        },
+        {
+            "tag": "MD",
+            "value": random3
+        },
+        {
+            "tag": "RSSI",
+            "value": random
+        }
+    ]
+}
+//console.log("Publish topic : ",topic," data :",JSON.stringify(package));
+broker.publish(topic,JSON.stringify(package));
 },5000)    
 })
 
