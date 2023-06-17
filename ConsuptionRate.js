@@ -4,6 +4,8 @@ const moment = require("moment");
 const findConsumption = async function (start, end, measurement, sensor) {
   try {
     //start value
+    start=moment(start).valueOf();
+    end=moment(end).format();
     const squery = `SELECT * FROM ${measurement} WHERE "sensor"='${sensor}' AND time >= ${start} limit 1`;
     var svalue = await client.query(squery);
     svalue = parseInt(svalue[0].value);
@@ -12,12 +14,15 @@ const findConsumption = async function (start, end, measurement, sensor) {
     var evalue = await client.query(equery);
     evalue = parseInt(evalue[0].value);
     //output
-    console.log(evalue - svalue);
+    //console.log(evalue - svalue);
+    return evalue-svalue;
   } catch (err) {
     console.log("error");
   }
 };
 //Input
-var start = moment("2023-06-16 00:00:00").valueOf();
-var end = moment("2023-06-17 00:00:00").format();
-findConsumption(start, end, "Consumption", "RSSI");
+//var start = moment("2023-06-16 00:00:00").valueOf();
+//var end = moment("2023-06-17 00:00:00").format();
+//findConsumption(start, end, "Consumption", "RSSI");
+
+module.exports.findConsumption=findConsumption;
