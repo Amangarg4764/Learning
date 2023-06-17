@@ -4,7 +4,8 @@ const port=7000;
 const app=express();
 const path=require('path');
 const moment=require('moment');
-
+//const insertdata=require('./task3').insertConsumption;
+const addConsuptionToExcelsheet=require('./task4').addConsuptionToExcelsheet;
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'sitepages'));
 app.use(express.urlencoded({extended:true}));
@@ -35,6 +36,8 @@ app.post('/api',async function(req,res){
             c++;
        }
     }
+    //insertdata(JSON.stringify(ans),"apiOutput");
+    addConsuptionToExcelsheet(JSON.stringify(ans));
     return res.status(200).json({data:ans,message:`Consuption caluated done between range of ${req.body.start} to ${req.body.end}`});
     
     //return res.redirect('back');

@@ -18,6 +18,6 @@ client.on('connect',function(){
 // Callback function when a message is received
 client.on('message', (topic, message) => {
   console.log("Message Received : ",JSON.parse(message));
-  insert(message);
+  insert(message,topic);
   
 });
