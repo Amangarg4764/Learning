@@ -4,10 +4,10 @@ const moment=require('moment');
 //  --------------------------------------------------      CRUD operation-----------
 
 //influx fetch data ==> read data
-const fetchdata=async function(){
+module.exports.fetchdata=async function(database){
     try{
         
-        const data=await client.query(`SELECT * FROM Consumption`);
+        const data=await client.query(`SELECT * FROM ${database}`);
         //code of excel workbook=file
         const Workbook=new ExcelJS.Workbook();
         //worksheet
@@ -15,7 +15,6 @@ const fetchdata=async function(){
         WorkSheet.columns=[
             //{header:'s.no',key:'s.no',width:'10'},
             {header:'Time',key:'time',width:'30',style:{numFmt:'yyyy-mm-dd hh:mm:ss'}},
-            {header:'Device',key:'device',width:'20'},
             {header:'Sensor',key:'sensor',width:'10'},
             {header:'Value',key:'value',width:'10'}
         ]
@@ -34,7 +33,7 @@ const fetchdata=async function(){
 }
 
 //influx for create data
-module.exports.insertdata=async function(obj){
+module.exports.insertdata=async function(obj,topic){
     
     try{
         obj=JSON.parse(obj);
@@ -44,9 +43,9 @@ module.exports.insertdata=async function(obj){
                 const element = obj.data[index];
                 
                 await client.writePoints([{
-                measurement:"Consumption",
+                measurement:obj.device,
                 time:obj.time,
-                tags:{device:obj.device,sensor:element.tag},
+                tags:{sensor:element.tag},
                 fields:{value:element.value}
                 
             },]);
