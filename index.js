@@ -56,4 +56,4 @@ module.exports.insertdata=async function(obj,topic){
     }
 }
 
-fetchdata("Consumption");
+//fetchdata("Consumption");
