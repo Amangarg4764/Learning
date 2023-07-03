@@ -4,7 +4,7 @@ const influx=require('influx');
 
 //influx configuration
 const client=new influx.InfluxDB({
-    database:'learningInfluxDB',
+    database:process.env.DATABASE ||'learningInfluxDB',
     host:process.env.HOST || 'localhost',
     port:process.env.PORT || 8086,
 });

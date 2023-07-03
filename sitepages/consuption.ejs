@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Consuption calculate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <div>
+        <h2>
+            Consuption between start date and end date for sensor 
+        </h2>
+        <form id="valdate" action="/api" method='post'>
+            <label for="Measurement">Measurement</label>
+            <input type="text" id="Measurement" name="measurement"><br><br>
+            <label for="Sensor">Sensor</label>
+            <input type="text" id="Sensor" name="sensor"><br><br>
+            <label for="Start">Start Date & Time</label>
+            <input type="datetime-local" id="Start" name="start"><br><br>
+            <label for="End">End Date & Time</label>
+            <input type="datetime-local" id="End" name="end"><br><br>
+            <button type='submit'>Calcluate</button>
+        </form>
+        <h3 id="ans"></h3>
+  </body>
+</html>

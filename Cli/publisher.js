@@ -1,7 +1,7 @@
 const mqtt = require('mqtt');
 
 // MQTT broker information
-const broker = mqtt.connect("mqtt://127.0.0.1:1883");
+const broker = mqtt.connect(process.env.MQTT || "mqtt://127.0.0.1:1883");
 const topic="Consumption"
 const max=1000;
 const min=1;
